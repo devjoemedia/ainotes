@@ -1,7 +1,19 @@
-import React from "react";
+'use client'
+
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 
 const Editor = () => {
-  return <div>Editor</div>;
-};
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+    ],
+    content: '<p>Hello World! 🌎️</p>',
+  })
 
-export default Editor;
+  return (
+    <EditorContent editor={editor} />
+  )
+}
+
+export default Editor

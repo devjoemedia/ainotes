@@ -4,7 +4,9 @@ import React, { useState } from "react";
 const CreateFolder = () => {
   const [text, setText] = useState<string>("");
 
-  const handleCreateFolder = async (e: React.FormEvent<HTMLFormElement>) => {};
+  const handleCreateFolder = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <div>

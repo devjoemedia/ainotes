@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useChat } from "ai/react";
+import Editor from "./Editor";
 
 interface Message {
   id: number;
@@ -57,6 +58,8 @@ const CreateNote = () => {
               </div>
             </div>
           ))}
+
+          <Editor />
         </div>
 
         <form onSubmit={handleSubmit}>

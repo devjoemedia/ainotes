@@ -52,7 +52,7 @@ const Page = () => {
             <h2 className='text-lg text-slate-500'>This folder is empty</h2>
             <Link href='/folder/1/note/create'>
               <button className='text-slate-900 hover:bg-slate-200 transition-all ease-in animate-pulse cursor-pointer px-5 py-1 rounded bg-slate-100 '>
-                New Note +
+                + Create
               </button>
             </Link>
           </div>
