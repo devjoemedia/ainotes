@@ -1,11 +1,16 @@
 "use client";
+import useNoteStore from "@/store/useNoteStore";
 import React, { useState } from "react";
 
 const CreateFolder = () => {
   const [text, setText] = useState<string>("");
+  const addFolder = useNoteStore((state) => state.addFolder);
 
   const handleCreateFolder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!text || text.length < 3) return alert("add more than 3 characters");
+    addFolder({ title: text });
+    setText("");
   };
 
   return (

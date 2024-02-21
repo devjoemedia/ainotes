@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <main className='text-primary-text h-screen overflow-hidden w-full bg-white'>
           <div className='grid grid-cols-5 gap-2 h-full'>
-            <div className='col-span-1 hidden lg:block  bg-[#F9F9F9] h-full p-4 space-y-3'>
+            <div className='col-span-1 hidden lg:block overflow-y-scroll bg-[#F9F9F9] h-full px-4 space-y-3'>
               <SideBar />
             </div>
 

@@ -5,7 +5,7 @@ type NoteCardProps = {
   folderId: number;
   noteId: number;
   title: string;
-  timestamp: string;
+  timestamp: number;
 };
 
 const NoteCard = ({ folderId, noteId, timestamp, title }: NoteCardProps) => {

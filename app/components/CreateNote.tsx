@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useChat } from "ai/react";
 import Editor from "./Editor";
+import useNoteStore from "@/store/useNoteStore";
+import { useParams } from "next/navigation";
 
 interface Message {
   id: number;
@@ -10,16 +12,27 @@ interface Message {
 }
 
 const CreateNote = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [text, setText] = useState<string>("");
+  const params = useParams<{ id: string }>();
+  // const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const addNote = useNoteStore((state) => state.addNote);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addNote({
+      title: text,
+      folderId: parseInt(params.id),
+    });
+    setText("");
+  };
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    // Scroll to the bottom when messages change or component mounts
-    if (chatContainerRef.current)
-      chatContainerRef.current.scrollTop =
-        chatContainerRef?.current?.scrollHeight;
-  }, [messages]);
+  // useEffect(() => {
+  //   // Scroll to the bottom when messages change or component mounts
+  //   if (chatContainerRef.current)
+  //     chatContainerRef.current.scrollTop =
+  //       chatContainerRef?.current?.scrollHeight;
+  // }, [messages]);
 
   return (
     <div className='  w-[80%] h-screen mx-auto'>
@@ -43,7 +56,7 @@ const CreateNote = () => {
             </div>
           </div>
 
-          {messages.map((message, index) => (
+          {/* {messages.map((message, index) => (
             <div key={index} className={` flex text-secondary-text p-1`}>
               <div className='flex space-x-1'>
                 <button className='text-white cursor-pointer w-[45px] h-[45px]  rounded-full bg-slate-900 flex items-center justify-center'>
@@ -57,9 +70,9 @@ const CreateNote = () => {
                 <p className='text-slate-500 text-[11px] ml-2'>12: 00 AM</p>
               </div>
             </div>
-          ))}
+          ))} */}
 
-          <Editor />
+          {/* <Editor /> */}
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -67,8 +80,10 @@ const CreateNote = () => {
             <input
               type='text'
               placeholder='Type here...'
-              value={input}
-              onChange={handleInputChange}
+              value={text}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setText(e.target.value)
+              }
               className='w-full text-gray-900 block focus:outline-none bg-slate-100 rounded-md py-3  px-2 lg:pl-6 '
             />
             <div className='flex items-center space-x-1'>
